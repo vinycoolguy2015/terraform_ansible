@@ -1,3 +1,5 @@
+**Steps for Ques 3 given at https://gist.github.com/houdinisparks/1e0fcdc9bb1c0d6d426e765ab6dc2abd:**
+
 1- Install minikube as per the instructions provided at https://kubernetes.io/docs/tasks/tools/install-minikube/
 
 2- Start minikube by executing minkube start comamnd
