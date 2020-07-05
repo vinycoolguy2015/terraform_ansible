@@ -10,6 +10,9 @@ yum install -y nodejs
 
 git clone https://github.com/chapagain/nodejs-mysql-crud
 rds_hostname=`aws rds describe-db-instances --region us-east-1 |jq [.DBInstances[0].Endpoint.Address][0]| tr -d '"'`
+if [ $rds_hostname == "null" ]; then  sleep 14m;fi
+rds_hostname=`aws rds describe-db-instances --region us-east-1 |jq [.DBInstances[0].Endpoint.Address][0]| tr -d '"'`
+
 cd nodejs-mysql-crud
 sed -i "s/localhost/$rds_hostname/g" config.js
 node app.js
