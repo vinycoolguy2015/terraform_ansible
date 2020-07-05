@@ -9,7 +9,7 @@ Steps for Ques 1 and Ques 2 given at https://gist.github.com/houdinisparks/1e0fc
   3-Execute following commands on our base instance:  
       ```  
       sudo yum update -y  
-      sudo yum install -y git wget unzip epel-release  
+      sudo yum install -y git wget unzip epel-release   
       sudo yum install -y python-pip  
       sudo pip install awscli  
       ```
