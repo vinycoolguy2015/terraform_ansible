@@ -8,11 +8,11 @@ Steps for Ques 1 and Ques 2 given at https://gist.github.com/houdinisparks/1e0fc
 
   3-Execute following commands on our base instance: sudo yum update -y && sudo yum install -y git wget unzip epel-release && sudo yum install -y python-pip && sudo pip install awscli
 
-  4-Setup AWS CLI on base instance using aws configure command and set following parameters:
+  4-Setup AWS CLI on base instance using aws configure command and set following parameters:  
     ```
     AWS Access Key ID : <access_key_of_IAM_user_we_created in step 1>
     AWS Secret Access Key : <secret_access_key_of_IAM_user_we_created in step 1>
-    Default region name [us-east-1]:
+    Default region name : us-east-1]
     ```
  
   5- Setup Terraform on base instance using following commands: 
