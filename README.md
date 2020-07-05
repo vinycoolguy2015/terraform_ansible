@@ -42,11 +42,22 @@
         terraform plan
         terraform apply
         
-  11- Once terraform apply completes, it will output the IP of the instance terraform created. From base instance, SSH into that instance
+  11- Once terraform apply completes, it will output the IP of the instance terraform created. From base instance, SSH into that instance.
   
   
   ```
   ssh -i ~/.ssh/id_rsa ec2-user@<IP Given by Terraform output>
+  ```
+  
+  12- Now for Ques2 deliverables, run following commnds on the newly created instance:
+  
+  
+  ```
+  nslookup www.google.com
+  curl https://www.google.com
+  telnet localhost 80
+  telnet localhost 8080
+  telnet localhost 3306
   ```
   
   
