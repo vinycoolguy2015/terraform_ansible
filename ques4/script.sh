@@ -9,8 +9,9 @@ curl -sL https://rpm.nodesource.com/setup_14.x | sudo -E bash -
 yum install -y nodejs
 
 git clone https://github.com/chapagain/nodejs-mysql-crud
-rds_hostname=`aws rds describe-db-instances --region us-east-1 |jq [.DBInstances[0].Endpoint.Address][0]| tr -d '"'`
-if [ $rds_hostname == "null" ]; then  sleep 14m;fi
+#rds_hostname=`aws rds describe-db-instances --region us-east-1 |jq [.DBInstances[0].Endpoint.Address][0]| tr -d '"'`
+rds_status=`aws rds describe-db-instances --region us-east-1 |jq [.DBInstances[0].DBInstanceStatus][0]| tr -d '"'`
+if [ $rds_status != "available" ]; then  sleep 14m;fi
 rds_hostname=`aws rds describe-db-instances --region us-east-1 |jq [.DBInstances[0].Endpoint.Address][0]| tr -d '"'`
 
 cd nodejs-mysql-crud
