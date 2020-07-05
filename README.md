@@ -1,6 +1,6 @@
 # terraform_ansible
 
-Steps for Ques 1 and Ques 2 given at https://gist.github.com/houdinisparks/1e0fcdc9bb1c0d6d426e765ab6dc2abd:
+#Steps for Ques 1 and Ques 2 given at https://gist.github.com/houdinisparks/1e0fcdc9bb1c0d6d426e765ab6dc2abd:
 
   1-Create EC2 IAM user with AmazonEC2FullAccess permission. Note down it's Access Key and Secret Access Key.
 
