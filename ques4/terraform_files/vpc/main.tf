@@ -1,3 +1,5 @@
+data "aws_availability_zones" "available" {}
+
 #--------------------------------------------------------------------- Create VPC
 
 resource "aws_vpc" "vpc" {
@@ -32,7 +34,7 @@ resource "aws_route_table" "public" {
     gateway_id = "${aws_internet_gateway.internet_gateway.id}"
   }
 
-  tags {
+  tags = {
     Name = "Public Route Table"
   }
   depends_on = ["aws_internet_gateway.internet_gateway"]
@@ -46,7 +48,7 @@ resource "aws_route_table" "private" {
     nat_gateway_id = "${aws_nat_gateway.vpc_nat_gateway.id}"
   }
 
-  tags {
+  tags = {
     Name = "Private Route Table"
   }
 
@@ -63,7 +65,7 @@ resource "aws_subnet" "vpc_public_subnet" {
   map_public_ip_on_launch = true
   availability_zone       = "${data.aws_availability_zones.available.names[count.index]}"
 
-  tags {
+  tags = {
     Name = "VPC_Public_Subnet_${count.index + 1}"
   }
 }
@@ -75,7 +77,7 @@ resource "aws_subnet" "vpc_private_subnet" {
   map_public_ip_on_launch = false
   availability_zone       = "${data.aws_availability_zones.available.names[count.index]}"
 
-  tags {
+  tags = {
     Name = "VPC_Private_Subnet_${count.index + 1}"
   }
 }
@@ -88,9 +90,9 @@ resource "aws_eip" "vpc_nat_gateway_eip" {
 }
 
 resource "aws_nat_gateway" "vpc_nat_gateway" {
-  allocation_id = "${aws_eip.vpc1_nat_gateway_eip.id}"
+  allocation_id = "${aws_eip.vpc_nat_gateway_eip.id}"
   subnet_id     = "${aws_subnet.vpc_public_subnet.*.id[0]}"
-  tags {
+  tags = {
     Name = "Application VPC Nat Gateway"
   }
 }
@@ -101,13 +103,13 @@ resource "aws_nat_gateway" "vpc_nat_gateway" {
 resource "aws_route_table_association" "vpc_public_assoc" {
   count          = "${var.subnet_count}"
   subnet_id      = "${aws_subnet.vpc_public_subnet.*.id[count.index]}"
-  route_table_id = "${aws_route_table.vpc_public_rt.id}"
+  route_table_id = "${aws_route_table.public.id}"
 }
 
 resource "aws_route_table_association" "vpc_private_assoc" {
   count          = "${var.subnet_count}"
   subnet_id      = "${aws_subnet.vpc_private_subnet.*.id[count.index]}"
-  route_table_id = "${aws_route_table.vpc_private_rt.id}"
+  route_table_id = "${aws_route_table.private.id}"
 }
 
 
@@ -115,9 +117,9 @@ resource "aws_route_table_association" "vpc_private_assoc" {
 #--------------------------------------------------------------------- Create DB Subnet Group
 resource "aws_db_subnet_group" "rds_subnetgroup" {
   name       = "rds_subnetgroup"
-  subnet_ids = "${aws_subnet.vpc_private_subnet.*.id[count.index]}"
+  subnet_ids = ["${aws_subnet.vpc_private_subnet.*.id[0]}","${aws_subnet.vpc_private_subnet.*.id[1]}"]
 
-  tags {
+  tags = {
     Name = "RDS_Subnet_Group"
   }
 }

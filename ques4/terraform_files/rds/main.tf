@@ -1,13 +1,14 @@
 resource "aws_db_instance" "application" {
   allocated_storage       = "${var.db_storage}"
-  max_allocated_storage   = "${var.db_maxstorage}"
   storage_type            = "gp2"
   engine                  = "mysql"
   engine_version          = "5.7"
-  instance_class          = "${var.dbinstance_clas}"
-  name                    = "Application RDS Instance"
+  instance_class          = "${var.dbinstance_class}"
+  name                    = "ApplicationRDS"
+  identifier              =  var.rds_name
   username                =  "${var.dbuser}"
   password                = "${var.dbpassword}"
+  skip_final_snapshot     = true
   parameter_group_name    = "default.mysql5.7"
   db_subnet_group_name    = "${var.dbsubnet}"
   multi_az                = true

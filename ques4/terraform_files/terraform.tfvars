@@ -1,4 +1,10 @@
-"subnet_count"              = "3"
-"vpc_cidr"                  = "10.1.0.0/16"
-"vpc_public_subnet_cidrs"   = ["10.1.0.0/24","10.1.1.0/24,10.2.0.0/24"]
-"vpc_private_subnet_cidrs"  =["10.1.3.0/24","10.1.4.0/24","10.1.5.0/24"]
+subnet_count               = "2"
+vpc_cidr                   = "10.1.0.0/16"
+vpc_public_subnet_cidrs    = ["10.1.0.0/24","10.1.1.0/24"]
+vpc_private_subnet_cidrs   = ["10.1.2.0/24","10.1.3.0/24"]
+aws_region                 = "us-east-1"
+db_storage                 = 10
+dbinstance_class           = "db.t3.small"
+dbuser                     = "root"
+dbpassword                 = "Test1086#"
+rds_name                   = "application-rds"

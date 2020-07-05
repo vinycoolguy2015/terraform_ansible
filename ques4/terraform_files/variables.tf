@@ -1,29 +1,33 @@
-variable "subnet_count" {}
+variable "subnet_count" {
+}
 
-variable "vpc_cidr" {}
+variable "vpc_cidr" {
+}
 
 variable "vpc_private_subnet_cidrs" {
-  type = "list"
+  type = list(string)
 }
 
 variable "vpc_public_subnet_cidrs" {
-  type = "list"
+  type = list(string)
 }
 
-variable "db_storage" {}
+variable "db_storage" {
+}
 
-variable "db_maxstorage" {}
 
-variable "dbinstance_clas" {}
+variable "dbinstance_class" {
+}
 
-variable "username" {}
+variable "dbuser" {
+}
 
-variable "dbpassword" {}
+variable "dbpassword" {
+}
 
-variable "dbsubnet" {}
+variable "rds_name" {
+}
 
-variable "rds_security_group" {}
+variable "aws_region" {
+}
 
-variable "rds_name" {}
-
-variable "aws_region" {}
