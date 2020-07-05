@@ -41,3 +41,13 @@
         terraform init
         terraform plan
         terraform apply
+        
+  11- Once terraform apply completes, it will output the IP of the instance terraform created. From base instance, SSH into that instance
+  
+  
+  ```
+  ssh -i ~/.ssh/id_rsa ec2-user@<IP Given by Terraform output>
+  ```
+  
+  
+  
