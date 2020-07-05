@@ -10,8 +10,8 @@ Steps for Ques 1 and Ques 2 given at https://gist.github.com/houdinisparks/1e0fc
 
   4-Setup AWS CLI on base instance using aws configure command and set following parameters:  
     ```
-    AWS Access Key ID : <access_key_of_IAM_user_we_created in step 1>
-    AWS Secret Access Key : <secret_access_key_of_IAM_user_we_created in step 1>
+    AWS Access Key ID : <access_key_of_IAM_user_we_created in step 1>  
+    AWS Secret Access Key : <secret_access_key_of_IAM_user_we_created in step 1>  
     Default region name : us-east-1]
     ```
  
