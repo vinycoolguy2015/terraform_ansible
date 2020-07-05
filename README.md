@@ -7,10 +7,12 @@ Steps for Ques 1 and Ques 2 given at https://gist.github.com/houdinisparks/1e0fc
   2-Launch a CentOS 7 machine in AWS and SSH into that machine.This will act as a base instance where we'll execute our script
 
   3-Execute following commands on our base instance:  
+      ```
       sudo yum update -y  
       sudo yum install -y git wget unzip epel-release  
       sudo yum install -y python-pip  
       sudo pip install awscli  
+      ```
 
   4-Setup AWS CLI on base instance using aws configure command and set following parameters:  
     
