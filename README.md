@@ -8,12 +8,12 @@ Steps for Ques 1 and Ques 2 given at https://gist.github.com/houdinisparks/1e0fc
 
   3-Execute following commands on our base instance:  
   
-      ```  
+      
       sudo yum update -y  
       sudo yum install -y git wget unzip epel-release   
       sudo yum install -y python-pip  
       sudo pip install awscli  
-      ```
+      
 
   4-Setup AWS CLI on base instance using aws configure command and set following parameters:  
     
@@ -23,9 +23,11 @@ Steps for Ques 1 and Ques 2 given at https://gist.github.com/houdinisparks/1e0fc
    
  
   5- Setup Terraform on base instance using following commands: 
+  
+  
     wget https://releases.hashicorp.com/terraform/0.12.28/terraform_0.12.28_linux_amd64.zip
     unzip terraform_0.12.28_linux_amd64.zip 
-     sudo mv terraform /usr/local/bin
+    sudo mv terraform /usr/local/bin
      
   6- Install ansible on base instance using sudo yum install -y ansible command. Open /etc/ansible/ansible.cfg and uncomment host_key_checking = False to disable        host checking.
   
@@ -35,7 +37,9 @@ Steps for Ques 1 and Ques 2 given at https://gist.github.com/houdinisparks/1e0fc
 
   9- cd terraform_ansible/ques1_ques2
 
-  10- Execute following commands to create our infrastructure
+  10- Execute following commands to create our infrastructure:
+  
+  
         terraform init
         terraform plan
         terraform apply
