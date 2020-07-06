@@ -4,7 +4,7 @@ resource "aws_db_instance" "application" {
   engine                  = "mysql"
   engine_version          = "5.7"
   instance_class          = "${var.dbinstance_class}"
-  name                    = "ApplicationRDS"
+  name                    = "test"
   identifier              =  var.rds_name
   username                =  "${var.dbuser}"
   password                = "${var.dbpassword}"
