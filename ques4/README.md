@@ -43,5 +43,7 @@
         
   10- Once terraform apply completes, it will output the DNS of the ALB created. Hit that URL in your browser and you'll see node application's home page
   
+  **Known Issue: As per https://github.com/chapagain/nodejs-mysql-crud, we need to create a table named users. This process is manual. We need to create a temporary bastion server to ssh into webserver instance.Once we are logged in to webserver, we can connect to RDS and create this table ** 
+  
  
   
