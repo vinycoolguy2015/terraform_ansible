@@ -1,5 +1,6 @@
 #! /bin/bash
 
+sleep 180
 yum update -y
 yum install -y mysql git jq
 
