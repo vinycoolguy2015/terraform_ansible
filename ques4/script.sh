@@ -1,5 +1,6 @@
 #! /bin/bash
 
+yum update -y
 yum install -y mysql git jq
 
 yum install -y gcc-c++ make
