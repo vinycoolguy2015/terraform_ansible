@@ -43,5 +43,5 @@
         
   10- Once terraform apply completes, it will output the DNS of the ALB created. Hit that URL in your browser and you'll see node application's home page
   
-  **Known Issue: Since RDS Provisioing will take approx 15 minutes and Terraform doesn't support inter module dependency, Web server instance will be created first and it will remain unhealthy in the target group. Once the RDS is created,delete the existing web server instance so that new instance can connect to RDS and will serve traffic.**
+  **Known Issue: As per https://github.com/chapagain/nodejs-mysql-crud, we need to create a database named test. This step is manual as of now.Create a temporary bastin host and Once RDS is up,ssh into webserver instance and connect to RDS database to create database **
   
