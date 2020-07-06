@@ -1,9 +1,6 @@
 #! /bin/bash
 
-#yum install -y mysql git awscli jq
-yum install -y git awscli jq
-
-#mysql -u root -pTest1086# -h application-rds.chynuosgviuy.us-east-1.rds.amazonaws.com -e "create database test;use test;CREATE TABLE users (id int(11) NOT NULL auto_increment,name varchar(100) NOT NULL,age int(3) NOT NULL,email varchar(100) NOT NULL,PRIMARY KEY (id));"
+yum install -y mysql git awscli jq
 
 yum install -y gcc-c++ make
 curl -sL https://rpm.nodesource.com/setup_14.x | sudo -E bash -
