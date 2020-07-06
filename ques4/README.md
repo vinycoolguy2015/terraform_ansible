@@ -43,5 +43,5 @@
         
   10- Once terraform apply completes, it will output the DNS of the ALB created. Hit that URL in your browser and you'll see node application's home page
   
-  **Known Issue: As per https://github.com/chapagain/nodejs-mysql-crud, we need to create a database named test. This step is manual as of now.Create a temporary bastin host and Once RDS is up,ssh into webserver instance and connect to RDS database to create database. **
+ **Known Issue: As per https://github.com/chapagain/nodejs-mysql-crud, we need to create a database named test. This step is manual as of now.Create a temporary bastin host and Once RDS is up,ssh into webserver instance and connect to RDS database to create database. **
   
