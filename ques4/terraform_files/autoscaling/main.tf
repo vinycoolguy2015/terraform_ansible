@@ -10,7 +10,8 @@ resource "aws_key_pair" "auth" {
 
 resource "aws_iam_instance_profile" "webserver_profile" {
   name = "webserver_profile"
-  role = "${aws_iam_role.role.name}"
+  role = aws_iam_role.role.name
+  depends_on = [aws_iam_role.role]
 }
 
 resource "aws_iam_role" "role" {
@@ -57,7 +58,7 @@ EOF
 resource "aws_iam_policy_attachment" "web-attach" {
   name       = "webserver-attachment"
   roles      = ["${aws_iam_role.role.name}"]
-  policy_arn = "${aws_iam_policy.policy.arn}"
+  policy_arn = aws_iam_policy.policy.arn
 }
 
 #---------------------------------Launch Configuration
@@ -73,7 +74,7 @@ resource "aws_launch_configuration" "web" {
   lifecycle {
     create_before_destroy = true
   }
-  depends_on = ["aws_key_pair.auth"]
+  depends_on = [aws_key_pair.auth]
 }
 
 
@@ -89,9 +90,9 @@ resource "aws_autoscaling_group" "web" {
   health_check_type         = "ELB"
   desired_capacity          = 1
   force_delete              = true
-  launch_configuration      = "${aws_launch_configuration.web.name}"
+  launch_configuration      = aws_launch_configuration.web.name
   vpc_zone_identifier       = var.private_subnets
-  depends_on = ["aws_launch_configuration.web"]
+  depends_on = [aws_launch_configuration.web]
   tag {
     key                 = "Name"
     value               = "Web_Server"
@@ -127,20 +128,20 @@ resource "aws_lb" "web" {
 
 #---------------------------------ALB Listener
 resource "aws_lb_listener" "web_front_end" {
-  load_balancer_arn = "${aws_lb.web.arn}"
+  load_balancer_arn = aws_lb.web.arn
   port              = "80"
   protocol          = "HTTP"
   default_action {
     type             = "forward"
-    target_group_arn = "${aws_lb_target_group.web.arn}"
+    target_group_arn = aws_lb_target_group.web.arn
   }
 }
 
 
 #--------------------------------Target Group Attachment
 resource "aws_autoscaling_attachment" "asg_attachment_web" {
-  autoscaling_group_name = "${aws_autoscaling_group.web.id}"
-  alb_target_group_arn   = "${aws_lb_target_group.web.arn}"
+  autoscaling_group_name = aws_autoscaling_group.web.id
+  alb_target_group_arn   = aws_lb_target_group.web.arn
 }
 
 
@@ -157,10 +158,10 @@ resource "aws_cloudwatch_metric_alarm" "high" {
   threshold                 =  var.highcpu
   alarm_description         = "Scale down web servers when CPU utilization is more than threshold"
   dimensions = {
-    AutoScalingGroupName = "${aws_autoscaling_group.web.name}"
+    AutoScalingGroupName = aws_autoscaling_group.web.name
   }
-  alarm_actions     = ["${aws_autoscaling_policy.scaleup.arn}"]
-  depends_on = ["aws_autoscaling_group.web"]
+  alarm_actions     = [aws_autoscaling_policy.scaleup.arn]
+  depends_on = [aws_autoscaling_group.web]
 }
 
 resource "aws_cloudwatch_metric_alarm" "low" {
@@ -174,10 +175,10 @@ resource "aws_cloudwatch_metric_alarm" "low" {
   threshold                 =  var.lowcpu
   alarm_description         = "Scale down web servers when CPU utilization is less than threshold"
   dimensions = {
-    AutoScalingGroupName = "${aws_autoscaling_group.web.name}"
+    AutoScalingGroupName = aws_autoscaling_group.web.name
   }
-  alarm_actions     = ["${aws_autoscaling_policy.scaledown.arn}"]
-  depends_on = ["aws_autoscaling_group.web"]
+  alarm_actions     = [aws_autoscaling_policy.scaledown.arn]
+  depends_on = [aws_autoscaling_group.web]
 }
 
 
@@ -188,8 +189,8 @@ resource "aws_autoscaling_policy" "scaleup" {
   scaling_adjustment     = 1
   adjustment_type        = "ChangeInCapacity"
   cooldown               = 300
-  autoscaling_group_name = "${aws_autoscaling_group.web.name}"
-  depends_on = ["aws_autoscaling_group.web"]
+  autoscaling_group_name = aws_autoscaling_group.web.name
+  depends_on = [aws_autoscaling_group.web]
 }
 
 resource "aws_autoscaling_policy" "scaledown" {
@@ -197,6 +198,6 @@ resource "aws_autoscaling_policy" "scaledown" {
   scaling_adjustment     = -1
   adjustment_type        = "ChangeInCapacity"
   cooldown               = 300
-  autoscaling_group_name = "${aws_autoscaling_group.web.name}"
-  depends_on = ["aws_autoscaling_group.web"]
+  autoscaling_group_name = aws_autoscaling_group.web.name
+  depends_on = [aws_autoscaling_group.web]
 }
